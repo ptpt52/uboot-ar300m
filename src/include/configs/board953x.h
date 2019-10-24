@@ -143,6 +143,10 @@
 #define ATH_ROOTFS_SIZE		"6336k(rootfs)"
 #endif
 
+#ifdef CFG_FLASH_SIZE
+#undef CFG_FLASH_SIZE
+#endif
+
 #define CFG_FLASH_SECTOR_SIZE	(64*1024)
 #if (FLASH_SIZE == 32)
 #define CFG_FLASH_SIZE		0x02000000	/* Total flash size */
@@ -401,7 +405,7 @@
 
 #ifdef CONFIG_ATH_NAND_SUPPORT
 #ifdef ATH_SPI_NAND
-#	define CONFIG_BOOTCOMMAND       "if nand bad; then nboot 0x81000000 0 || run blf; else run blf; fi"
+#	define CONFIG_BOOTCOMMAND       "if nand bad; then nboot 0x81000000 0 0x100000 || run blf; else run blf; fi"
 #else
 #	define CONFIG_BOOTCOMMAND	"bootm 0x9f050000"
 #endif

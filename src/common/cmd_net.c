@@ -32,6 +32,7 @@
 
 
 extern int do_bootm (cmd_tbl_t *, int, int, char *[]);
+extern int NetLoopHttpd(void);
 
 static int netboot_common (proto_t, cmd_tbl_t *, int , char *[]);
 

@@ -248,7 +248,7 @@ void all_led_off(void)
         red_led_off();
 }
 
-void gpio17_select_out()
+void gpio17_select_out(void)
 {
 unsigned int tmp=0;
 tmp = ath_reg_rd(AR7240_GPIO_FUNC4);

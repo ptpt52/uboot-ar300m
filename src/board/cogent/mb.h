@@ -249,7 +249,7 @@ typedef
     }
 cma_mb_reg;
 
-extern __inline__ unsigned char
+static __inline__ unsigned char
 cma_mb_reg_read(volatile cma_mb_reg *reg)
 {
     unsigned char data = reg->value;
@@ -257,7 +257,7 @@ cma_mb_reg_read(volatile cma_mb_reg *reg)
     return data;
 }
 
-extern __inline__ void
+static __inline__ void
 cma_mb_reg_write(volatile cma_mb_reg *reg, unsigned char data)
 {
     reg->value = data;

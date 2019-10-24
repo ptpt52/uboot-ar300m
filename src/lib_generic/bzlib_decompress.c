@@ -1,4 +1,3 @@
-#include <config.h>
 #include <common.h>
 #include <watchdog.h>
 #ifdef CONFIG_BZIP2

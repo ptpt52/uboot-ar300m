@@ -47,6 +47,7 @@ int main (int argc, char *argv[])
 	bitmap_t bmp;
 	bitmap_t *b = &bmp;
 	uint16_t data_offset, n_colors;
+	int err;
 
 	if (argc < 2) {
 		fprintf (stderr, "Usage: %s file\n", argv[0]);
@@ -68,14 +69,15 @@ int main (int argc, char *argv[])
 	 * ignore the rest
 	 */
 	skip_bytes (fp, 8);
-	fread (&data_offset, sizeof (uint16_t), 1, fp);
+	err = fread (&data_offset, sizeof (uint16_t), 1, fp);
 	skip_bytes (fp, 6);
-	fread (&b->width,   sizeof (uint16_t), 1, fp);
+	err = fread (&b->width,   sizeof (uint16_t), 1, fp);
 	skip_bytes (fp, 2);
-	fread (&b->height,  sizeof (uint16_t), 1, fp);
+	err = fread (&b->height,  sizeof (uint16_t), 1, fp);
 	skip_bytes (fp, 22);
-	fread (&n_colors, sizeof (uint16_t), 1, fp);
+	err = fread (&n_colors, sizeof (uint16_t), 1, fp);
 	skip_bytes (fp, 6);
+	err = err; /*just ignore warnning*/
 
 	/*
 	 * Repair endianess.

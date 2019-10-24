@@ -57,7 +57,7 @@ extern int do_bootd (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[]);
 
 #define MAX_DELAY_STOP_STR 32
 
-static char * delete_char (char *buffer, char *p, int *colp, int *np, int plen);
+//static char * delete_char (char *buffer, char *p, int *colp, int *np, int plen);
 static int parse_line (char *, char *[]);
 #if defined(CONFIG_BOOTDELAY) && (CONFIG_BOOTDELAY >= 0)
 static int abortboot(int);
@@ -228,6 +228,8 @@ static __inline__ int abortboot(int bootdelay)
 static int menukey = 0;
 #endif
 
+extern void gpio17_select_out(void);
+
 static __inline__ int abortboot(int bootdelay)
 {
 	int abort = 0;
@@ -351,6 +353,10 @@ void bootcount_store(ulong count)
 }
 
 extern int reset_button_status(void);
+extern int NetLoopHttpd(void);
+extern int calibration_status(void);
+extern int check_tftp_file(void);
+extern int select_boot_dev(void);
 
 void main_loop (void)
 {
@@ -564,7 +570,7 @@ void main_loop (void)
 			//case 3:run_command("run lc",0);break;
 			case 2:
 			case 0:printf("Booting image at: 0x9F050000\n");break;
-			case 1:printf("Booting image at: 0x81000000\n");break;
+			case 1:printf("Booting image at: 0x81100000\n");break;
 			default:break;
 		}
 	check_tftp_file();
@@ -885,7 +891,7 @@ static int cread_line(char *buf, unsigned int *len)
 {
 	unsigned long num = 0;
 	unsigned long eol_num = 0;
-	unsigned long rlen;
+	//unsigned long rlen;
 	unsigned long wlen;
 	char ichar;
 	int insert = 1;
@@ -893,7 +899,7 @@ static int cread_line(char *buf, unsigned int *len)
 	int rc = 0;
 	char esc_save[8];
 	while (1) {
-		rlen = 1;
+		//rlen = 1;
 		ichar = getcmd_getch();
 
 		if ((ichar == '\n') || (ichar == '\r')) {

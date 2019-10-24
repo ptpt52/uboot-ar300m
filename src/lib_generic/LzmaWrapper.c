@@ -28,7 +28,6 @@
 #include <string.h>
 #endif
 
-#include <config.h>
 #include <common.h>
 #include <linux/types.h>
 #include <linux/string.h>
@@ -43,7 +42,7 @@
 static const char *kCantReadMessage = "Can not read from source buffer";
 static const char *kCantAllocateMessage = "Not enough buffer for decompression";
 
-static size_t rpos=0, dpos=0;
+static size_t rpos=0/*, dpos=0*/;
 
 static int MyReadFileAndCheck(unsigned char *src, void *dest, size_t size)
 {
@@ -146,7 +145,7 @@ int lzma_inflate(unsigned char *source, int s_len, unsigned char *dest, int *d_l
     outStream = 0;
   else
   {
-    if (outSizeFull > d_len)
+    if (outSizeFull > *d_len)
       outStream = 0;
     else
       outStream = dest;

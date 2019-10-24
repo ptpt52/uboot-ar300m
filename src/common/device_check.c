@@ -77,7 +77,7 @@ int select_boot_dev(){
 			run_command("bootm 0x9f050000",0);break;
 		case 1:
 		case 2: 
-			run_command("nboot 0x81000000 0",0);break;
+			run_command("nboot 0x81000000 0 0x100000",0);break;
 		default: break;
 		}		
 	}

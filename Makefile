@@ -61,7 +61,7 @@ define Package/qca-legacy-uboot/common
     SECTION:=boot
     CATEGORY:=Boot Loaders
     TITLE:=U-boot for $(1)
-    DEPENDS:=@TARGET_ar71xx $(2)
+    DEPENDS:=@TARGET_ath79 $(2)
     URL:=http://www.denx.de/wiki/U-Boot
     VARIANT:=$(1)
   endef
