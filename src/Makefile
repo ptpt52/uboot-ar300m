@@ -49,6 +49,9 @@ VENDOR=
 TOPDIR	:= $(shell if [ "$$PWD" != "" ]; then echo $$PWD; else pwd; fi)
 export	TOPDIR
 
+ATH_SPI_NAND = 1
+ATH_DUAL_FLASH = 1
+
 ifndef COMPRESSED_UBOOT
 COMPRESSED_UBOOT = 0
 endif 

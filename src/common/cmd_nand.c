@@ -136,7 +136,7 @@ arg_off_size(int argc, char *argv[], ulong *off, ulong *size, ulong totsize)
 
 }
 
-int do_nand(cmd_tbl_t * cmdtp, int flag, int argc, char *argv[])
+int do_nand(cmd_tbl_t * cmdtp, int flag, int argc, const char *argv[])
 {
 	int i, dev, ret;
 	ulong addr, off, size;
@@ -291,7 +291,7 @@ U_BOOT_CMD(nand, 5, 1, do_nand,
 	"nand markbad off - mark bad block at offset (UNSAFE)\n"
 	"nand biterr off - make a bit error at offset (UNSAFE)\n");
 
-int do_nandboot(cmd_tbl_t * cmdtp, int flag, int argc, char *argv[])
+int do_nandboot(cmd_tbl_t * cmdtp, int flag, int argc, const char *argv[])
 {
 	char *boot_device = NULL;
 	char *ep;
@@ -476,7 +476,7 @@ extern int nand_write_oob(struct nand_chip *nand, size_t ofs,
 				size_t len, size_t *retlen, const u_char *buf);
 
 
-int do_nand (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
+int do_nand (cmd_tbl_t *cmdtp, int flag, int argc, const char *argv[])
 {
     int rcode = 0;
 

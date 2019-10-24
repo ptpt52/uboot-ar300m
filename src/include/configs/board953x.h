@@ -15,6 +15,9 @@
 #ifndef __BOARD_955X_H
 #define __BOARD_955X_H
 
+#define CONFIG_ATH_NAND_SUPPORT 1
+#define ATH_SPI_NAND 1
+
 /* ethernet debug */
 /* #define ET_DEBUG */
 

@@ -24,7 +24,7 @@
 
 extern char nand_boot_failed;
 extern char tftp_file;
-extern int do_nand(cmd_tbl_t * cmdtp, int flag, int argc, char *argv[]);
+extern int do_nand(cmd_tbl_t * cmdtp, int flag, int argc, const char *argv[]);
 int check_nand()
 {
 	int argc=2;
