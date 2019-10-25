@@ -263,6 +263,7 @@ unsigned  int switch_boot_load()
   val1 =ath_reg_rd(AR7240_GPIO_IN) & GPIO_SWITCH_LOAD;
 	udelay(20000);//20ms
   val2 =ath_reg_rd(AR7240_GPIO_IN) & GPIO_SWITCH_LOAD;
+  printf("switch_boot_load val1=%d val2=%d\n", val1, val2);
   if(val1 == val2) return val1;
   else{
 	printf("is default boot device \n");
