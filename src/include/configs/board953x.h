@@ -15,9 +15,6 @@
 #ifndef __BOARD_955X_H
 #define __BOARD_955X_H
 
-#define CONFIG_ATH_NAND_SUPPORT 1
-#define ATH_SPI_NAND 1
-
 /* ethernet debug */
 /* #define ET_DEBUG */
 
@@ -51,13 +48,13 @@
 	#define UPDATE_SCRIPT_UBOOT_SIZE_IN_BYTES			"0x40000"
 #endif
 
-#define CONFIG_FOR_GL_AR300M
+#define CONFIG_FOR_XWRT_GW521
 // Firmware partition offset
 #if defined(CONFIG_FOR_DLINK_DIR505_A1)
 	#define WEBFAILSAFE_UPLOAD_KERNEL_ADDRESS			WEBFAILSAFE_UPLOAD_UBOOT_ADDRESS + 0x80000
 #elif defined(CONFIG_FOR_8DEVICES_CARAMBOLA2)
 	#define WEBFAILSAFE_UPLOAD_KERNEL_ADDRESS			WEBFAILSAFE_UPLOAD_UBOOT_ADDRESS + 0x50000
-#elif defined(CONFIG_FOR_DOMINO) || defined(CONFIG_FOR_GL_AR300M)
+#elif defined(CONFIG_FOR_DOMINO) || defined(CONFIG_FOR_XWRT_GW521)
 	#define WEBFAILSAFE_UPLOAD_KERNEL_ADDRESS			WEBFAILSAFE_UPLOAD_UBOOT_ADDRESS + 0x50000
 #elif defined(CONFIG_FOR_DRAGINO_V2)
 	#define WEBFAILSAFE_UPLOAD_KERNEL_ADDRESS			WEBFAILSAFE_UPLOAD_UBOOT_ADDRESS + 0x40000
@@ -289,7 +286,7 @@
 #	endif
 #	define ATH_F_FILE		fs_name(${bc}-nand-jffs2)
 #	define ATH_K_FILE		vmlinux${bc}.lzma.uImage
-#	define ATH_F_CMD		"lf=if ping 192.168.1.2; then tftp 0x80060000 ${dir}openwrt-gl-ar300m.bin && erase 0x9f050000 +$filesize && cp.b $fileaddr 0x9f050000 $filesize; if nand bad; then run dlf; fi; else echo ping 192.168.1.2 failed; fi\0"
+#	define ATH_F_CMD		"lf=if ping 192.168.1.2; then tftp 0x80060000 ${dir}x-wrt.bin && erase 0x9f050000 +$filesize && cp.b $fileaddr 0x9f050000 $filesize; if nand bad; then run dlf; fi; else echo ping 192.168.1.2 failed; fi\0"
 #	define ATH_K_CMD		nand_gen_cmd(lk, ATH_K_ADDR, ATH_K_FILE, ATH_K_LEN)
 #	define ATH_EXTRA_ENV		"bootdevice=0\0"
 #else
@@ -357,7 +354,7 @@
 #	if (FLASH_SIZE == 32)
 #		define ATH_U_CMD	gen_cmd2(lu, 0x9f000000, 0xa0000000, ATH_U_FILE)
 #	else
-#		define ATH_U_CMD	"lu=tftp 0x80060000 ${dir}uboot-gl-ar300m.bin && erase 0x9f000000 +50000 && cp.b $fileaddr 0x9f000000 $filesize; reset\0"
+#		define ATH_U_CMD	"lu=tftp 0x80060000 ${dir}uboot-x-wrt-gw521.bin && erase 0x9f000000 +50000 && cp.b $fileaddr 0x9f000000 $filesize; reset\0"
 #	endif
 #endif
 
@@ -376,11 +373,11 @@
 /* boot or load firmware */
 #define GL_BLF_CMD "blf=bootm 0x9f050000 || run lf; boot\0"
 /* nand load firmware */
-#define GL_DLF_CMD "dlf=if ping 192.168.1.2; then echo ok; elif ping 192.168.1.2; then echo ok; elif ping 192.168.1.2; then echo ok; elif echo ping 192.168.1.2; then echo ok; elif echo ping 192.168.1.2; then echo ok; else echo ping finally failed; fi; tftp 0x81000000 openwrt-gl-ar300m-ubi.img && nand erase && nand write $fileaddr 0 $filesize\0"
+#define GL_DLF_CMD "dlf=if ping 192.168.1.2; then echo ok; elif ping 192.168.1.2; then echo ok; elif ping 192.168.1.2; then echo ok; elif echo ping 192.168.1.2; then echo ok; elif echo ping 192.168.1.2; then echo ok; else echo ping finally failed; fi; tftp 0x81000000 x-wrt-ubi.img && nand erase && nand write $fileaddr 0 $filesize\0"
 /* web load firmware */
 #define GL_WLF_CMD "wlf=if nand bad; then nand erase && nand write $web_fileaddr 0 $web_filesize; else erase 0x9f050000 +e30000 && cp.b $web_fileaddr 0x9f050000 $web_filesize; fi; erase 0x9f040000 +0x10000\0"
 /*nor flash load firmware*/
-#define GL_RLF_CMD "rlf=if ping 192.168.1.2; then tftp 0x80060000 ${dir}openwrt-gl-ar300m.bin && erase 0x9f050000 +$filesize && cp.b $fileaddr 0x9f050000 $filesize; else echo ping 192.168.1.2 failed; fi\0"
+#define GL_RLF_CMD "rlf=if ping 192.168.1.2; then tftp 0x80060000 ${dir}openwrt.bin && erase 0x9f050000 +$filesize && cp.b $fileaddr 0x9f050000 $filesize; else echo ping 192.168.1.2 failed; fi\0"
 /*select boot device*/
 #define GL_BOOT_DEV_CMD "boot_dev=off\0"
 #define GL_ALTBOOTCMD "altbootcmd=run blf\0"

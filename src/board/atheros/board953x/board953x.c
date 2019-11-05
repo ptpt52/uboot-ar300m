@@ -167,8 +167,8 @@ int reset_button_status(void)
 
         gpio = ath_reg_rd(AR7240_GPIO_IN);
 
-#define GL_AR300M_GPIO_BTN_RESET 3
-	if (gpio & (1 << GL_AR300M_GPIO_BTN_RESET)) {
+#define XWRT_GW521_GPIO_BTN_RESET 14
+	if (gpio & (1 << XWRT_GW521_GPIO_BTN_RESET)) {
 		return(0);
 	} else {
 		return(1);

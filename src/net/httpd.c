@@ -61,7 +61,7 @@ int do_http_upgrade(const ulong size, const int upgrade_type){
 				WEBFAILSAFE_UPLOAD_UBOOT_ADDRESS,
 				WEBFAILSAFE_UPLOAD_UBOOT_SIZE_IN_BYTES);
 
-#if !defined(CONFIG_FOR_GL_AR300M)
+#if !defined(CONFIG_FOR_XWRT_GW521)
 	} else if(upgrade_type == WEBFAILSAFE_UPGRADE_TYPE_FIRMWARE){
 
 		printf("\n\n****************************\n*    FIRMWARE UPGRADING    *\n* DO NOT POWER OFF DEVICE! *\n****************************\n\n");

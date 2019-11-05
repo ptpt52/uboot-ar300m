@@ -247,7 +247,7 @@ static __inline__ int abortboot(int bootdelay)
 #ifdef CONFIG_MENUPROMPT
 	printf(CONFIG_MENUPROMPT, bootdelay);
 #else
-	printf("Hit 'gl' to stop autoboot: %2d ", bootdelay);
+	printf("Hit 'tb' to stop autoboot: %2d ", bootdelay);
 #endif
 
 #if defined CONFIG_ZERO_BOOTDELAY_CHECK
@@ -278,11 +278,11 @@ static __inline__ int abortboot(int bootdelay)
 # else
 				//(void) getc();  /* consume input	*/
 				tmp_key = getc();
-				if(tmp_key == 'g'){
+				if(tmp_key == 't'){
 					tmp_flag = 1;
 					break;
 				}
-				if((tmp_flag == 1)&&(tmp_key == 'l'))
+				if((tmp_flag == 1)&&(tmp_key == 'b'))
 				{
 					abort  = 1;	/* don't auto boot	*/
 					bootdelay = 1;	/* no more delay	*/
