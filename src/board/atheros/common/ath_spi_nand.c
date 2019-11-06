@@ -321,7 +321,8 @@ ath_parse_read_id(ath_spi_nand_sc_t *sc, uint8_t *did)
 		if (get_ath_spi_nand_vendor(id) != ATH_NAND_MID &&
 		    get_ath_spi_nand_vendor(id) != HYT_NAND_MID &&
 		    get_ath_spi_nand_vendor(id) != ETH_NAND_MID &&
-		    get_ath_spi_nand_vendor(id) != MX_NAND_MID)
+		    get_ath_spi_nand_vendor(id) != MX_NAND_MID &&
+			get_ath_spi_nand_vendor(id) != 0xC2)
 			continue;
 
 		*did = get_ath_spi_nand_device(id);
@@ -538,7 +539,7 @@ ath_spi_nand_hw_init(ath_spi_nand_sc_t *sc)
 		printk("%s: Block Unprotect failed\n", __func__);
 		return -EIO;
 	}
-	return ath_spi_nand_ecc(sc, 1);
+	return ath_spi_nand_ecc(sc, 0);
 }
 
 static inline void
@@ -1429,6 +1430,7 @@ static int ath_spi_nand_init_info(struct mtd_info *mtd, ath_spi_nand_sc_t *sc, u
 	case 0x11:
 	case 0x12:
 	case 0xe1:
+	case 0x20:
 		sc->info.version = ATH_NAND_VER_2;
 		sc->info.ecc_mask = 0x07;
 		sc->info.uncorr_code = 7;
@@ -1442,6 +1444,10 @@ static int ath_spi_nand_init_info(struct mtd_info *mtd, ath_spi_nand_sc_t *sc, u
 		else
 			sc->ecclayout = &ath_spi_nand_oob_128;
 		mtd->oobsize = 128;
+		if (did == 0x20) {
+			sc->ecclayout = &ath_spi_nand_oob_64;
+			mtd->oobsize = 64;
+		}
 #endif
 		break;
 	default:

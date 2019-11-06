@@ -167,7 +167,7 @@ int reset_button_status(void)
 
         gpio = ath_reg_rd(AR7240_GPIO_IN);
 
-#define XWRT_GW521_GPIO_BTN_RESET 14
+#define XWRT_GW521_GPIO_BTN_RESET 3
 	if (gpio & (1 << XWRT_GW521_GPIO_BTN_RESET)) {
 		return(0);
 	} else {
